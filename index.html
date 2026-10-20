@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><base target="_top">
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#3b3a8f"><title>Pythagoras Digital</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E📐%3C/text%3E%3C/svg%3E"><base target="_top">
 <style>
 :root{--n:#3b3a8f;--p:#6c63ff;--p2:#4b45c9}
 *{box-sizing:border-box}body{margin:0;font-family:'Poppins','Segoe UI',system-ui,sans-serif;background:#eceaff;color:#2b2a5c}
@@ -73,6 +73,31 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px
 .grid .cat.d2 .ic{animation:ir 1.6s ease-in-out infinite}.grid .cat.lock .ic{animation:ij 2.6s ease-in-out infinite}.grid .cat:hover .ic{animation-duration:.5s}
 .ban:after{animation:ib 3s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.cat,.cat .ic,.ban:after{animation:none!important}}
+html{-webkit-text-size-adjust:100%}button{touch-action:manipulation}input,select,textarea{font-size:16px}
+.idc>div{min-width:0}.idc b{overflow-wrap:anywhere}.cat .ct{display:flex;flex-direction:column;align-items:center;gap:4px}
+@media (max-width:560px){
+body{font-size:15px}.w{padding:58px 10px 20px}.card{padding:12px;border-radius:16px}h2{font-size:20px}h3{font-size:17px}
+#bar{padding:6px 10px;font-size:14px}.ban{padding:14px;border-radius:20px}.ban h2{font-size:21px}.ban p{font-size:13px}
+.ring{width:62px;height:62px}.ring span{width:46px;height:46px;font-size:13px}
+.idc{grid-template-columns:1fr 1fr;gap:6px}.idc div{padding:6px 8px}.idc b{font-size:13px}
+.grid{grid-template-columns:1fr;gap:10px}.grid .cat:nth-child(5),.grid .cat:last-child{grid-column:auto}
+.cat{flex-direction:row;text-align:left;min-height:0;padding:12px;gap:12px;align-items:center}.cat .ic{flex:none;width:54px;height:54px;font-size:28px}
+.cat .ct{align-items:flex-start;text-align:left}.cat b{font-size:15px}.cat small{font-size:12px}
+.tjd summary{padding:10px 12px;font-size:15px}.bd2{padding:2px 12px 10px;font-size:13.5px}.flow{flex-direction:column}
+.rate button{font-size:22px;padding:6px 9px}button{min-height:42px}.bn button{min-height:0}
+#qic,.bigic{font-size:72px}.code{font-size:34px;letter-spacing:5px}.kp{grid-template-columns:1fr 1fr}
+.pill{width:86%}.lg{border-radius:24px;min-height:540px}.lgi{padding:34px 16px 28px}.lgi h1{font-size:24px}
+table{font-size:12.5px}td input,td select{padding:8px 6px;font-size:14px}.stp,.tp{font-size:14px}.chip{font-size:12px;padding:3px 9px}
+}
+@media (max-width:560px){#menu.on,#menu2.on{display:flex;flex-direction:column}#menu>.ban,#menu2>.ban{order:0}#menu2>button.g{order:1;align-self:flex-start;margin:8px 0}#menu>.sec,#menu2>.sec{order:2}#menu>.grid,#menu2>.grid{order:3}#menu>.idc,#menu2>.idc{order:4;margin-top:16px}#menu>.tjd,#menu2>.tjd{order:5;width:100%}#menu>.card,#menu2>.card{order:6}#menu>.bn,#menu2>.bn{order:99}.sec{margin:14px 2px 4px}}
+@media (max-width:560px){
+#qic{line-height:1.4;padding:8px 0 4px;margin-top:6px}.lv{margin-bottom:2px}
+#qa{display:flex;flex-wrap:wrap;gap:6px;align-items:center}#qa input{flex:1 1 150px;margin:0}#qa .opt{flex:1 1 100%}
+.stc:not(.cur) .tx{display:none}.stc{padding:3px 10px}.chips{gap:5px}
+.card>div[style*="space-between"]{gap:8px}.card>div[style*="space-between"] h2{flex:1;margin:0}.card>div[style*="space-between"] button{flex:none;white-space:nowrap;padding:8px 12px;font-size:13px;min-height:36px}
+td select{padding:8px 2px;min-width:78px;font-size:13px}.mt{font-size:15px;padding:10px}.mt.done{font-size:16px}
+}
+@media (max-width:360px){.idc{grid-template-columns:1fr}.cat .ic{width:46px;height:46px;font-size:24px}}
 </style></head><body>
 
 <div id="bar"><b id="who"></b><span><button onclick="mute()" id="sb">🔊</button><button onclick="out()">🚪 Keluar</button></span></div>
@@ -162,6 +187,8 @@ const run=(f,...a)=>{
   return fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:f,args:a})}).then(r=>{if(!r.ok)throw new Error('Server membalas '+r.status);return r.json()}).then(j=>{if(j&&j.error)throw new Error(j.error);return j.result})};
 let U=null,guard=false,PW='',cur='login',rows=[],MUTE=false,AC=null,lastH=null;
 try{MUTE=localStorage.getItem('mute')=='1'}catch(e){}
+// Di HP, bagian tujuan dan cara belajar ditutup dulu agar kartu tahap langsung terlihat
+if(window.innerWidth<=560)document.querySelectorAll('#menu details,#menu2 details').forEach(d=>d.open=false);
 // ===== SOUND EFFECT =====
 function ctx(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume()}catch(e){}return AC}
 function tone(f,d,t,v,at,f2){if(MUTE)return;const c=ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain(),s=c.currentTime+(at||0);o.type=t||'sine';o.frequency.setValueAtTime(f,s);if(f2)o.frequency.exponentialRampToValueAtTime(f2,s+d);g.gain.setValueAtTime(v||.15,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.connect(g);g.connect(c.destination);o.start(s);o.stop(s+d)}
@@ -206,13 +233,13 @@ const SG=[['diag','🧩','Cek Kemampuan Awal','Asesmen diagnostik','#ffb25b,#ff8
 function home(ns){guard=false;show('menu');if(!ns)save({scr:'menu'});const T=Math.min(U.tahap,5);$('idx').innerHTML=idxh();rview();$('hi').textContent=U.nama;$('hs').textContent='Sudah menyelesaikan '+T+' dari 5 tahap';
   $('stp').textContent='★'.repeat(T)+'☆'.repeat(5-T);$('pb').style.width=(T*20)+'%';
   $('rg').style.background='conic-gradient(#ffc93c '+(T*72)+'deg,#ffffff33 0)';$('rgt').textContent=(T*20)+'%';
-  $('stages').innerHTML=SG.map((s,i)=>'<div class="cat '+(i>U.tahap?'lock':i==U.tahap?'cur':'')+'" style="background:linear-gradient(135deg,'+s[4]+')" '+(i>U.tahap?'':'onclick="go(\''+s[0]+'\')"')+'><span class="ic">'+(i>U.tahap?'🔒':s[1])+'</span><b>'+s[2]+'</b><small>'+s[3]+'</small>'+(i<U.tahap?'<span class="bd">✔ Selesai · Ulangi</span>':i==U.tahap?'<span class="bd">▶ Giliranmu</span>':'')+'</div>').join('')
-  +'<div class="cat d2'+(U.tahap<5?' lock':U.tahap==5?' cur':'')+'" style="background:linear-gradient(135deg,#2dd4bf,#0ea5e9)" '+(U.tahap<5?'':'onclick="m2()"')+'><span class="ic">'+(U.tahap<5?'🔒':'🚀')+'</span><b>Dashboard 2: Pengembangan Lanjutan</b><small>'+(U.tahap<5?'Terbuka setelah Asesmen Akhir selesai':'Misi berpasangan, masalah dari lingkunganmu, dan proyek ukur tinggi')+'</small>'+(U.tahap>=5?'<span class="bd">🔓 Terbuka</span>':'')+'</div>'}
+  $('stages').innerHTML=SG.map((s,i)=>'<div class="cat '+(i>U.tahap?'lock':i==U.tahap?'cur':'')+'" style="background:linear-gradient(135deg,'+s[4]+')" '+(i>U.tahap?'':'onclick="go(\''+s[0]+'\')"')+'><span class="ic">'+(i>U.tahap?'🔒':s[1])+'</span><div class="ct"><b>'+s[2]+'</b><small>'+s[3]+'</small>'+(i<U.tahap?'<span class="bd">✔ Selesai · Ulangi</span>':i==U.tahap?'<span class="bd">▶ Giliranmu</span>':'')+'</div></div>').join('')
+  +'<div class="cat d2'+(U.tahap<5?' lock':U.tahap==5?' cur':'')+'" style="background:linear-gradient(135deg,#2dd4bf,#0ea5e9)" '+(U.tahap<5?'':'onclick="m2()"')+'><span class="ic">'+(U.tahap<5?'🔒':'🚀')+'</span><div class="ct"><b>Dashboard 2: Pengembangan Lanjutan</b><small>'+(U.tahap<5?'Terbuka setelah Asesmen Akhir selesai':'Misi berpasangan, masalah dari lingkunganmu, dan proyek ukur tinggi')+'</small>'+(U.tahap>=5?'<span class="bd">🔓 Terbuka</span>':'')+'</div></div>'}
 const S2=[['kolab','🤝','Misi Berpasangan','Pecahkan teka-teki bersama temanmu','#ffb25b,#ff8a1f'],['karya','🌍','Buat Masalah dari Lingkunganmu','Ciptakan soal Pythagoras dari sekitarmu','#6a8dff,#4b6bff'],['proyek','📏','Proyek Ukur Tinggi Benda','Ukur benda nyata di sekolahmu','#78d08a,#3fb06a']];
 function m2(){if(U.tahap<5){alert('Selesaikan Asesmen Akhir dulu ya 😊');return}guard=false;show('menu2');save({scr:'menu2'});const T=Math.max(0,Math.min(U.tahap-5,3));
   rview();$('h2s').textContent='Sudah menyelesaikan '+T+' dari 3 kegiatan';$('st2').textContent='★'.repeat(T)+'☆'.repeat(3-T);$('pb2').style.width=(T/3*100)+'%';
   $('rg2').style.background='conic-gradient(#ffc93c '+(T*120)+'deg,#ffffff33 0)';$('rgt2').textContent=Math.round(T/3*100)+'%';
-  $('stages2').innerHTML=S2.map((s,i)=>{const lk=U.tahap-5<i;return '<div class="cat '+(lk?'lock':'')+'" style="background:linear-gradient(135deg,'+s[4]+')" '+(lk?'':'onclick="go2(\''+s[0]+'\')"')+'><span class="ic">'+(lk?'🔒':s[1])+'</span><b>'+s[2]+'</b><small>'+(lk?'Selesaikan kegiatan sebelumnya dulu':s[3])+'</small>'+(i<T?'<span class="bd">✔ Selesai · Ulangi</span>':i==T?'<span class="bd">▶ Giliranmu</span>':'')+'</div>'}).join('')}
+  $('stages2').innerHTML=S2.map((s,i)=>{const lk=U.tahap-5<i;return '<div class="cat '+(lk?'lock':'')+'" style="background:linear-gradient(135deg,'+s[4]+')" '+(lk?'':'onclick="go2(\''+s[0]+'\')"')+'><span class="ic">'+(lk?'🔒':s[1])+'</span><div class="ct"><b>'+s[2]+'</b><small>'+(lk?'Selesaikan kegiatan sebelumnya dulu':s[3])+'</small>'+(i<T?'<span class="bd">✔ Selesai · Ulangi</span>':i==T?'<span class="bd">▶ Giliranmu</span>':'')+'</div></div>'}).join('')}
 function go2(k){log('mulai_'+k);if(k=='kolab')kolOpen();else if(k=='karya')karyaOpen();else pjOpen()}
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const r2=x=>String(Math.round(x*100)/100).replace('.',',');
@@ -254,7 +281,7 @@ const lkSel=p=>'<select data-p="'+p+'" onchange="lkSet(this)"><option value="">P
 const lkChip=(t,c)=>'<span class="chip" style="background:'+c+'">'+t+'</span>';
 function lkOpen(d){LK=d?Object.assign(newLK(),d):newLK();rows=LK.rows;show('konsep');lkRender()}
 function lkRender(){const s=LK.s;$('kpb').style.width=((s+1)/7*100)+'%';
-  $('kk').innerHTML='<div class="chips">'+LKS.map((x,i)=>lkChip((i+1)+'. '+x,i==s?'#ff8a1f':i<s?'#1dd1a1':'#b5b0f0')).join('')+'</div><div class="lv">'+LKG[s]+'</div>'+[ls0,ls1,ls2,ls3,ls4,ls5,ls6][s]()+'<div><button class="g" onclick="lkNav(-1)" '+(s==0?'disabled':'')+'>◀ Sebelumnya</button>'+(s<6?'<button onclick="lkNav(1)">Lanjut ▶</button>':'')+'</div>';
+  $('kk').innerHTML='<div class="chips">'+LKS.map((x,i)=>'<span class="chip stc'+(i==s?' cur':'')+'" style="background:'+(i==s?'#ff8a1f':i<s?'#1dd1a1':'#b5b0f0')+'">'+(i+1)+'<span class="tx">. '+x+'</span></span>').join('')+'</div><div class="lv">'+LKG[s]+'</div>'+[ls0,ls1,ls2,ls3,ls4,ls5,ls6][s]()+'<div><button class="g" onclick="lkNav(-1)" '+(s==0?'disabled':'')+'>◀ Sebelumnya</button>'+(s<6?'<button onclick="lkNav(1)">Lanjut ▶</button>':'')+'</div>';
   if(s==3){$('a').value=LK.a;$('b').value=LK.b;draw();tbl()}if(s==5)lkHint()}
 function ls0(){return '<div class="story"><b>🎯 Tujuan (TP G.8.1):</b> setelah belajar ini, aku mampu membuktikan, memahami, menerapkan, dan menjelaskan penalaran matematis tentang Teorema Pythagoras.</div><b>👥 Nama anggota kelompok</b> (minimal namamu sendiri)'+[0,1,2,3].map(i=>lkIn('g.'+i,(i+1)+'. Nama anggota')).join('')
  +'<div class="chips">'+lkChip('Stimulasi','#7a77b5')+lkChip('Meaningful Learning','#6a8dff')+'</div><h3>⚓ Kehidupan Nelayan di Laut Kepulauan Riau</h3>'
@@ -441,10 +468,10 @@ const pin=(k,ph,t)=>'<input placeholder="'+ph+'" value="'+esc(PJ[k])+'" oninput=
 const pta=(k,ph)=>'<textarea rows="3" placeholder="'+ph+'" oninput="PJ.'+k+'=this.value;psv()">'+esc(PJ[k])+'</textarea>';
 const pHs=()=>PJ.rows.map(r=>{const c=num(r[0]),d=num(r[1]);return c>0&&d>0&&c>d?Math.sqrt(c*c-d*d):null});
 const pOb=()=>PJ.ob=='Lainnya'?PJ.oo:PJ.ob;
-function pj(){const s=PJ.s;$('ppb').style.width=((s+1)/5*100)+'%';let h='<div class="chips">'+PS.map((x,i)=>'<span class="chip" style="background:'+(i==s?'#ff8a1f':i<s?'#1dd1a1':'#b5b0f0')+'">'+(i+1)+'. '+x+'</span>').join('')+'</div>';
+function pj(){const s=PJ.s;$('ppb').style.width=((s+1)/5*100)+'%';let h='<div class="chips">'+PS.map((x,i)=>'<span class="chip stc'+(i==s?' cur':'')+'" style="background:'+(i==s?'#ff8a1f':i<s?'#1dd1a1':'#b5b0f0')+'">'+(i+1)+'<span class="tx">. '+x+'</span></span>').join('')+'</div>';
   if(s==0)h+='<div class="story">👷 Kegiatan lapangan dilakukan <b>berkelompok (3-4 siswa)</b> bersama gurumu. <b>Keselamatan:</b> jangan memanjat! Semua pengukuran dilakukan dari tanah.</div><b>🎒 Siapkan alat:</b>'+['Meteran atau tali ukur','Patok atau kapur penanda','Tali panjang atau galah/tongkat','Alat tulis untuk mencatat'].map((t,i)=>'<label class="ckl"><input type="checkbox" '+(PJ.ck[i]?'checked':'')+' onchange="PJ.ck['+i+']=this.checked?1:0;psv()"> '+t+'</label>').join('')+pin('g','Nama kelompok')+pin('m','Nama anggota kelompok')+'<select onchange="PJ.ob=this.value;psv();pj()"><option value="">Pilih benda yang akan diukur</option>'+OBJ.map(o=>'<option '+(PJ.ob==o?'selected':'')+'>'+o+'</option>').join('')+'</select>'+(PJ.ob=='Lainnya'?pin('oo','Sebutkan bendanya'):'');
   else if(s==1)h+='<b>📐 Pilih metode pengukuran:</b><div class="tab"><button class="'+(PJ.mt==1?'on':'')+'" onclick="PJ.mt=1;psv();pj()">Tali miring</button><button class="'+(PJ.mt==2?'on':'')+'" onclick="PJ.mt=2;psv();pj()">Galah disandarkan</button></div><div class="story">'+(PJ.mt==1?'<b>Tali miring:</b> tarik tali dari bagian atas benda (misalnya tali bendera) lurus ke tanah sampai kencang, beri patok. Ukur panjang tali (<b>c</b>) dan jarak patok ke dasar benda (<b>d</b>).':'<b>Galah disandarkan:</b> sandarkan galah yang panjangnya diketahui (<b>c</b>) ke dinding atau benda. Ukur jarak kaki galah ke dinding (<b>d</b>). Hasilnya tinggi titik yang disentuh galah.')+'</div><div class="vz">'+scene('c','h','d')+'<div class="chips">'+chip('d: jarak di tanah',C1)+chip('h: tinggi (yang dicari)',C2)+chip('c: tali/galah',C3)+'</div><div class="fm">h = √(c² − d²)</div></div>'+pin('pr','Perkiraan tinggi benda (meter), sebelum mengukur',1)+pta('pl','Tuliskan rencana pengukuran kelompokmu (siapa memegang tali, siapa mencatat, dan seterusnya)');
-  else if(s==2)h+='<p>Ukur <b>3 kali</b> dengan posisi patok berbeda. Isi data, hasil tinggi dihitung otomatis. Gunakan koma atau titik untuk desimal.</p><table><tr><th>#</th><th>c (m)</th><th>d (m)</th><th>Tinggi h (m)</th></tr>'+PJ.rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td><input inputmode="decimal" value="'+esc(r[0])+'" oninput="PJ.rows['+i+'][0]=this.value;psv();pjh()"></td><td><input inputmode="decimal" value="'+esc(r[1])+'" oninput="PJ.rows['+i+'][1]=this.value;psv();pjh()"></td><td id="hh'+i+'"></td></tr>').join('')+'</table><div class="vz" id="psk"></div>';
+  else if(s==2)h+='<p>Ukur <b>3 kali</b> dengan posisi patok berbeda. Isi data, hasil tinggi dihitung otomatis. Gunakan koma atau titik untuk desimal.</p><div class="sw"><table><tr><th>#</th><th>c (m)</th><th>d (m)</th><th>Tinggi h (m)</th></tr>'+PJ.rows.map((r,i)=>'<tr><td>'+(i+1)+'</td><td><input inputmode="decimal" value="'+esc(r[0])+'" oninput="PJ.rows['+i+'][0]=this.value;psv();pjh()"></td><td><input inputmode="decimal" value="'+esc(r[1])+'" oninput="PJ.rows['+i+'][1]=this.value;psv();pjh()"></td><td id="hh'+i+'"></td></tr>').join('')+'</table></div><div class="vz" id="psk"></div>';
   else if(s==3){const hs=pHs().filter(x=>x!=null),mean=hs.reduce((a,b)=>a+b,0)/(hs.length||1),pr=num(PJ.pr);h+='<div class="okb"><b>📊 Rata-rata tinggi '+esc(pOb())+': '+r2(mean)+' m</b><br>Selisih hasil terbesar dan terkecil: '+r2(Math.max(...hs)-Math.min(...hs))+' m'+(pr>0?'<br>Perkiraan awalmu '+r2(pr)+' m, selisih dengan hasil ukur '+r2(Math.abs(mean-pr)/mean*100)+'%':'')+'</div>'+chart('Hasil tiap pengukuran (meter)',hs.map((x,i)=>'Ukur '+(i+1)),[{n:'h',c:'#6c63ff',v:hs}],Math.max(...hs)*1.2,r2)+pta('a1','Mengapa ketiga hasil pengukuran bisa berbeda? Tulis alasanmu.')+pta('a2','Bagaimana cara membuat pengukuran kelompokmu lebih teliti?')}
   else{const hs=pHs().filter(x=>x!=null),mean=hs.reduce((a,b)=>a+b,0)/(hs.length||1);h+='<div class="vz" style="text-align:left"><b>📝 Ringkasan</b><br>Kelompok: '+esc(PJ.g)+'<br>Benda: '+esc(pOb())+'<br>Metode: '+(PJ.mt==1?'Tali miring':'Galah disandarkan')+'<br>Tinggi rata-rata: <b>'+r2(mean)+' m</b></div>'+pta('k','Kesimpulan: berapa tinggi benda yang kalian ukur dan bagaimana Teorema Pythagoras membantu?')+pta('r','Refleksi: apa yang kalian pelajari dan bagaimana Pythagoras dipakai di kehidupan nyata?')+'<button onclick="pkirim()">📤 Kirim Laporan Proyek</button>'}
   h+='<div><button class="g" onclick="pnx(-1)" '+(s==0?'disabled':'')+'>◀ Sebelumnya</button>'+(s<4?'<button onclick="pnx(1)">Lanjut ▶</button>':'')+'</div>';$('pj').innerHTML=h;if(s==2)pjh()}
